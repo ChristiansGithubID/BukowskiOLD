@@ -1,0 +1,25 @@
+{
+  "name": "bukowski",
+  "version": "0.1.0",
+  "description": "Allows for the running of Postman tests inside Playwright test runner",
+  "main": "index.js",
+  "types": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "/src/bukowski.ts"
+  },
+  "keywords": [],
+  "author": "Christian Gibbs",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/stream-chain": "^2.0.1",
+    "@types/stream-json": "^1.7.3",
+    "stream-json": "^1.8.0",
+    "ts-node": "^10.9.1",
+    "tsc": "^2.0.4",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "stream-chain": "^2.2.5"
+  }
+}

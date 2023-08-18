@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "8840b78e-5355-43e0-95d2-2cf41edd92ac",
+		"name": "OLT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26644960",
+		"_collection_link": "https://sorenson.postman.co/workspace/Online-Transcription-Service-~cd1c6ed9-3ac4-431f-a2ac-717aeec0430c/collection/26644960-8840b78e-5355-43e0-95d2-2cf41edd92ac?action=share&creator=26644960&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "GetSignedUrl-Upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"const\r",
+							"    utils = eval(globals.utils),\r",
+							"    varUtils = eval(globals.varUtils),\r",
+							"    {validator, stringify, tryParse, log} = utils\r",
+							"    \r",
+							"\r",
+							"// save the GUPS Profile Id for later\r",
+							"var uploadUrl  = varUtils.getEnv(\"uploadUrl\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"uploadUrl\", jsonData.uploadURL)\r",
+							"\r",
+							"var downloadUrl  = varUtils.getEnv(\"downloadURL\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"downloadURL\", jsonData.downloadURL)\r",
+							"\r",
+							"pm.test(\"statusTest\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"DownloadURLTest\", function(){\r",
+							"   pm.expect(pm.response.text()).to.include(\"uploadURL\")\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://hflc0pz6dg.execute-api.us-west-2.amazonaws.com/dev/up/formdata/kennedy.mp4",
+					"protocol": "https",
+					"host": [
+						"hflc0pz6dg",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"up",
+						"formdata",
+						"kennedy.mp4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put-FileInS3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/lbleak/Downloads/testing20.mp4"
+					}
+				},
+				"url": {
+					"raw": "{{uploadUrl}}",
+					"host": [
+						"{{uploadUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get File From S3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{downloadURL}}",
+					"host": [
+						"{{downloadURL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post YT FIle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://a76i2aisqb.execute-api.us-west-2.amazonaws.com/dev/newsarticle/z7_Kr25DbDw",
+					"protocol": "https",
+					"host": [
+						"a76i2aisqb",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"newsarticle",
+						"z7_Kr25DbDw"
+					],
+					"query": [
+						{
+							"key": "ContentType",
+							"value": "Multipart",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"z_cart_testuser@ccindeo.com\",\r\n    \"Password\": \"6H4uH7iwU2pafUy9i245bA7!!zUhE3\",\r\n    \"TenantId\": \"d0f7f33f-8d1f-4ac0-bccd-2ecda8bf422b\",  \r\n    \"ClientId\": \"ca7114f2-d398-45aa-9f55-ed654f74c06f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44332/authorize/token",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44332",
+					"path": [
+						"authorize",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSignedUrl-Download",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"const\r",
+							"    utils = eval(globals.utils),\r",
+							"    varUtils = eval(globals.varUtils),\r",
+							"    {validator, stringify, tryParse, log} = utils\r",
+							"    \r",
+							"\r",
+							"// save the GUPS Profile Id for later\r",
+							"var uploadUrl  = varUtils.getEnv(\"uploadUrl\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"uploadUrl\", jsonData.uploadURL)\r",
+							"\r",
+							"var downloadUrl  = varUtils.getEnv(\"downloadURL\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"downloadURL\", jsonData.downloadURL)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://hflc0pz6dg.execute-api.us-west-2.amazonaws.com/dev/up/formdata/newtest12.mp4",
+					"protocol": "https",
+					"host": [
+						"hflc0pz6dg",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"up",
+						"formdata",
+						"newtest12.mp4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
