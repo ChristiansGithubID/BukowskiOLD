@@ -36,8 +36,26 @@ export abstract class CollectionParser{
     public get URL(){return this._URLraw;}
 
     constructor(CollectionText:string){
-    //Create a reader object
+//this is just a placeholder until I get the real constructor built
+this._name="";//string;
+this._event="";// string; //probably not needed
+this._listen="";//string;
+this._scriptLines=["",""];// string[]; //multiple lines
+this._scriptType="";// string;
+this._requestMethod="";// String;
+this._requestHeaders=["",""];// string[];//multiple lines
+this._requestBody="";// string;
+this._URLraw="";//string;
+this._URLhost=["",""];// string[];////multiple lines, url parts that comprise the url (delimited by dots)
+this._URlpath=["",""];// string[]; //multiple lines, url parts that comprise the file path (delimited by slashes)  
+this._URLprotocol="";// string;
+this._URLquery="";// string; //multiple lines
+this._URLport="";// string;
+this._collectionVersion=0;//Number;
+        //Create a reader object
     }
+
+    
 
  //parser info:
  /*break down    into the  following objects: 
