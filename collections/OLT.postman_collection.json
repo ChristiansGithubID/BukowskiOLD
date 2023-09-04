@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "73c5aa03-3c9d-4077-a774-a1a7f8467ad5",
+		"name": "OLT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26644960",
+		"_collection_link": "https://sorenson.postman.co/workspace/Online-Transcription-Service-~cd1c6ed9-3ac4-431f-a2ac-717aeec0430c/collection/26644960-73c5aa03-3c9d-4077-a774-a1a7f8467ad5?action=share&source=collection_link&creator=26644960"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user/15",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"bleaker12\",\r\n    \"organizationId\": \"CC\",\r\n    \"email\": \"lbleak@sorenson.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"Loren\",\r\n    \"organizationId\": \"CCall\",\r\n    \"email\": \"lbleak@sorenson.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e23gjmw9bk.execute-api.us-west-2.amazonaws.com/newdev/user/13",
+							"protocol": "https",
+							"host": [
+								"e23gjmw9bk",
+								"execute-api",
+								"us-west-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"newdev",
+								"user",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "getJobsByState",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/job/state/Ready",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job",
+								"state",
+								"Ready"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getJobById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/job/9",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateJob",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jobType\":\"Video\",\r\n    \"userId\":16\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/job",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateJob",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jobId\":\"82cd2060-6fb7-4be0-a176-afce34f23c8c\",\r\n    \"jobType\":\"Video\",\r\n    \"userId\":13,\r\n    \"state\": \"Ready\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/job/9",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetSignedUrl-Download",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"const\r",
+							"    utils = eval(globals.utils),\r",
+							"    varUtils = eval(globals.varUtils),\r",
+							"    {validator, stringify, tryParse, log} = utils\r",
+							"    \r",
+							"\r",
+							"// save the GUPS Profile Id for later\r",
+							"\r",
+							"var downloadUrl  = varUtils.getEnv(\"downloadURL\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"downloadURL\", jsonData.downloadURL)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobId\" : \"ae858c23-6311-4835-aa84-891d7614dad7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/presigned/down/formdata/Panda.wmv",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"presigned",
+						"down",
+						"formdata",
+						"Panda.wmv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSignedUrl-Upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"const\r",
+							"    utils = eval(globals.utils),\r",
+							"    varUtils = eval(globals.varUtils),\r",
+							"    {validator, stringify, tryParse, log} = utils\r",
+							"    \r",
+							"\r",
+							"// save the GUPS Profile Id for later\r",
+							"var uploadUrl  = varUtils.getEnv(\"uploadUrl\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"uploadUrl\", jsonData.uploadURL)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobId\" : \"ae858c23-6311-4835-aa84-891d7614dad7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/presigned/up/formdata/TrySomething30Days.mp4",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"presigned",
+						"up",
+						"formdata",
+						"TrySomething30Days.mp4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put-FileInS3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/lbleak/Desktop/AV Files/trysomething30days.mp4"
+					}
+				},
+				"url": {
+					"raw": "{{uploadUrl}}",
+					"host": [
+						"{{uploadUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get File From S3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{downloadURL}}",
+					"host": [
+						"{{downloadURL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post YT FIle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://e23gjmw9bk.execute-api.us-west-2.amazonaws.com/newdev/youtube/dbd0c73f-055f-4g23-bf9c-5c831b445837_NewTest/sqSA-SY5Hro",
+					"protocol": "https",
+					"host": [
+						"e23gjmw9bk",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"newdev",
+						"youtube",
+						"dbd0c73f-055f-4g23-bf9c-5c831b445837_NewTest",
+						"sqSA-SY5Hro"
+					],
+					"query": [
+						{
+							"key": "ContentType",
+							"value": "Multipart",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"z_cart_testuser@ccindeo.com\",\r\n    \"Password\": \"6H4uH7iwU2pafUy9i245bA7!!zUhE3\",\r\n    \"TenantId\": \"d0f7f33f-8d1f-4ac0-bccd-2ecda8bf422b\",  \r\n    \"ClientId\": \"ca7114f2-d398-45aa-9f55-ed654f74c06f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://authbypassapi.azurewebsites.net/authorize/token",
+					"protocol": "https",
+					"host": [
+						"authbypassapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"authorize",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calling Savvy",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "CS3JHw7Xfx6fPprg880qq3y4awJDWGKH9wvOaHrg",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Pre-Signed-Url",
+						"value": "{{downloadURL}}",
+						"type": "text"
+					},
+					{
+						"key": "Callback-Url",
+						"value": "https://callback/xxxx",
+						"type": "text"
+					},
+					{
+						"key": "File-Name",
+						"value": "newsarticle-savvy.wav",
+						"type": "text"
+					},
+					{
+						"key": "Cust-Id",
+						"value": "test-user",
+						"type": "text"
+					},
+					{
+						"key": "Asrs",
+						"value": "microsoft",
+						"type": "text"
+					},
+					{
+						"key": "Transcript-Format",
+						"value": "json",
+						"type": "text"
+					},
+					{
+						"key": "Input-Language",
+						"value": "en-US",
+						"type": "text"
+					},
+					{
+						"key": "Transcript-Pre-Signed-Url",
+						"value": "{{uploadUrl}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://staging.savvy-batch.sorensoncloud.com/file",
+					"protocol": "https",
+					"host": [
+						"staging",
+						"savvy-batch",
+						"sorensoncloud",
+						"com"
+					],
+					"path": [
+						"file"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,38 @@
+Requirements:
+1. -Download a collection
+2. -Read a collection file 
+3. -Determine collection format 2.0 or 2.1
+4. -Parse the collection
+a. -Extract the calls
+i. Get call type
+ii. Get all headers 
+iii. Get data
+iv. Get URL
+v. Get whatever else is there
+b. Extract tests
+5. Place the tests in a test file for chai
+6. Interface between the playwright and chai
+7. Execute chai tests
+8. Report results
+
+1: Maybe or maybe not
+2: Postman Collections SDK
+3 done by SDK
+4: Postman SDK
+5: Separate Bukowski class builder that creates the test.spec files
+6: Not needed
+7 and 8 will be part of playwright test execution
+
+
+
+
+
+testbuilderClass:
+create a file called ITEMNAME.spec.ts in the tests folder. Get name from item.name in collection 
+
+
+Packages: Figure this out
+
+Classes: 
+
+
