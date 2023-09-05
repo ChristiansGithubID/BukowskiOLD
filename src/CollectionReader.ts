@@ -1,8 +1,6 @@
 import * as fs from 'fs';
 import * as pm from 'postman-collection';
 
-
-
 import {parser} from 'stream-json';
 
 import {pick} from 'stream-json/filters/Pick';

@@ -36,3 +36,37 @@ Packages: Figure this out
 Classes: 
 
 
+parser Requirements
+Read the file
+Get ItemsList
+From itemslist, extract each item
+parse each item into: 
+name
+event[]
+request
+url
+
+
+item {
+    name (This is a text value that will be used for the test.pec.ts file name)
+    event[](tests and scripts)
+        listen:(If the value = "test" then it's a test.)
+        script[](s)
+            exec[] (may include multiple scripts, Tests are included here)
+                type (text/javascript)
+    request
+        method[] (Get, post, delete, etc.)         
+        header[]
+            key
+            value
+            type
+            disabled
+    url
+        raw: string
+        protocol: https
+        host[]:
+            0 to many strings, that make up the left side of the url before domain
+        path[] 0 to many AFTER the domain
+    response},
+
+next item

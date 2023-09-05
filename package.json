@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Allows for the running of Postman tests inside Playwright test runner",
   "main": "index.js",
-  "types": "dist/index.js", 
+  "types": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "/src/bukowski.ts"
@@ -15,6 +15,7 @@
     "@types/node": "^20.5.1",
     "@types/stream-chain": "^2.0.1",
     "@types/stream-json": "^1.7.3",
+    "chai": "^4.3.8",
     "postman-collection": "^4.2.0",
     "stream-chain": "^2.2.5",
     "stream-json": "^1.8.0",
